@@ -1,32 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class PeopleCardComponent extends Component {
-  render() {
-    return (
-      <div className="box">
-        <article className="media">
-          <div className="media-left">
-            <figure className="image is-64x64">
-              <img
-                src="https://bulma.io/images/placeholders/128x128.png"
-                alt=""
-              />
-            </figure>
-          </div>
-          <div className="media-content">
-            <div className="content">
-              <p>
-                <strong>John Smith</strong> <small>@johnsmith</small>{' '}
-                <small>31m</small>
-                <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                efficitur sit amet massa fringilla egestas. Nullam condimentum
-                luctus turpis.
-              </p>
-            </div>
-          </div>
-        </article>
+const PeopleCardComponent = ({ person }) => {
+  console.log(person);
+  return person ? (
+    <div className="column is-6">
+      <div className="card">
+        <div className="card-content has-text-centered">
+          <p className="title">{person.name}</p>
+          <p className="subtitle">@{person.username}</p>
+          <p>
+            <strong>{person.email}</strong> <br /> <small>{person.phone}</small>
+            <br />
+            <button className="button is-text">https://{person.website}</button>
+          </p>
+          <h3
+            className="has-text-weight-medium is-family-secondary has-text-primary tooltip"
+            data-hover={person.company.catchPhrase}
+          >
+            {person.company.name}
+          </h3>
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  ) : null;
+};
+
+export default PeopleCardComponent;

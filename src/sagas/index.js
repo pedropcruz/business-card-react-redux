@@ -1,18 +1,26 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
-import { REQUEST_SUCCEDED, REQUESTING_DATA } from '../actions/types';
+import { put, takeLatest, call, all } from 'redux-saga/effects';
 
-const FETCH_URL = 'https://jsonplaceholder.typicode.com/users';
+import {
+  REQUESTING_DATA,
+  REQUEST_SUCCEDED,
+  SEARCH_PERSON,
+} from '../actions/types';
 
-function* fetchPersons() {
-  const json = yield fetch(FETCH_URL).then((res) => res.json());
+import { requestData, receiveData, requestFailed } from '../actions';
 
-  yield put({ type: REQUESTING_DATA, persons: json });
+import fetchData from '../api';
+
+function* handleRequest(action) {
+  try {
+    const data = yield call(fetchData);
+    yield put(receiveData(data));
+  } catch (e) {
+    console.error(e);
+  }
 }
 
-function* actionWatcher() {
-  yield takeLatest(REQUEST_SUCCEDED, fetchPersons);
+function* rootSaga() {
+  yield takeLatest(REQUESTING_DATA, handleRequest);
 }
 
-export default function* rootSaga() {
-  yield all([actionWatcher()]);
-}
+export default rootSaga;

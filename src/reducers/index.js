@@ -1,19 +1,7 @@
-import { REQUESTING_DATA, REQUEST_SUCCEDED } from '../actions/types';
+import { combineReducers } from 'redux';
 
-const defaultState = {
-  fetching: false,
-  persons: [],
-};
+import data from './data';
 
-const reducers = (state = defaultState, { type, persons }) => {
-  switch (type) {
-    case REQUESTING_DATA:
-      return { fetching: true, persons: [] };
-    case REQUEST_SUCCEDED:
-      return { fetching: false, persons };
-    default:
-      return state;
-  }
-};
-
-export default reducers;
+export default combineReducers({
+  data,
+});
