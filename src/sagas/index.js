@@ -1,26 +1,22 @@
-import { put, takeLatest, call, all } from 'redux-saga/effects';
+import { put, takeEvery, call, all, delay } from 'redux-saga/effects';
 
-import {
-  REQUESTING_DATA,
-  REQUEST_SUCCEDED,
-  SEARCH_PERSON,
-} from '../actions/types';
+import { REQUESTING_DATA } from '../constants';
 
-import { requestData, receiveData, requestFailed } from '../actions';
+import { receiveData } from '../actions';
 
 import fetchData from '../api';
 
 function* handleRequest(action) {
   try {
     const data = yield call(fetchData);
-    yield put(receiveData(data));
+    yield put(receiveData({ persons: data }));
   } catch (e) {
     console.error(e);
   }
 }
 
 function* rootSaga() {
-  yield takeLatest(REQUESTING_DATA, handleRequest);
+  yield all([takeEvery(REQUESTING_DATA, handleRequest)]);
 }
 
 export default rootSaga;

@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { search } from '../../actions';
+import { bindActionCreators } from 'redux';
 
 class SearchBarComponent extends Component {
-  state = {
-    query: '',
-  };
-
   onInputChange = (e) => {
-    this.setState({
-      query: e.target.value,
-    });
+    this.props.search({ query: e.target.value });
   };
 
   render() {
+    const { query } = this.props;
     return (
       <div className="control">
         <input
           className="input"
           type="text"
           placeholder="Search for a Person"
-          value={this.state.query}
+          value={query}
           onChange={this.onInputChange}
         />
       </div>
@@ -27,11 +24,7 @@ class SearchBarComponent extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  query: state.query,
-  persons: state.persons,
-});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ search }, dispatch);
 
-SearchBarComponent = connect(mapStateToProps, null)(SearchBarComponent);
-
-export default SearchBarComponent;
+export default connect(null, mapDispatchToProps)(SearchBarComponent);

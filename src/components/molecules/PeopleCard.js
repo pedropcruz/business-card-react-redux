@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PeopleCardComponent = ({ person }) => {
-  console.log(person);
   return person ? (
     <div className="column is-6">
       <div className="card">

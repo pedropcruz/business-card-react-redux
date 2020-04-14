@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { requestData, receiveData, search } from '../actions';
+import { requestData } from '../actions';
 
 import SearchBarComponent from '../components/molecules/SearchBar';
 import PeopleCardComponent from '../components/molecules/PeopleCard';
@@ -14,23 +14,29 @@ class HomePageComponent extends Component {
   }
 
   person = (person) => {
-    return <PeopleCardComponent person={person} />;
+    return <PeopleCardComponent person={person} key={person.id} />;
   };
 
   render() {
-    console.log(this.props.data);
-    const { fetching, persons = [] } = this.props.data;
+    const { filtered = [], fetching } = this.props.data;
+
+    const LoadingOrFallback = fetching ? (
+      <Loading fetching={fetching} />
+    ) : !filtered.length ? (
+      <h1 className="error">Nothing matched to your</h1>
+    ) : null;
+
     return (
       <section className="section">
         <div className="container">
           <SearchBarComponent />
-          <Loading fetching={fetching} />
-          {persons.length ? (
-            <div class="columns is-multiline is-vcentered">
-              {persons.map(this.person)}
+
+          {filtered.length ? (
+            <div className="columns is-multiline is-vcentered">
+              {filtered.map(this.person)}
             </div>
           ) : (
-            <Loading fetching={fetching} />
+            LoadingOrFallback
           )}
         </div>
       </section>

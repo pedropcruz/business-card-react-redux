@@ -1,18 +1,16 @@
-import { REQUESTING_DATA, REQUEST_SUCCEDED, SEARCH_PERSON } from './types';
+import { REQUESTING_DATA, REQUEST_SUCCEDED, SEARCH_PERSON } from '../constants';
 
-export const requestData = () => ({
+export const requestData = (payload) => ({
   type: REQUESTING_DATA,
-  fetching: true,
+  payload,
 });
 
-export const receiveData = (persons) => ({
+export const receiveData = (payload) => ({
   type: REQUEST_SUCCEDED,
-  fetching: false,
-  persons,
+  payload,
 });
 
-export const search = (persons) => ({
+export const search = (payload) => ({
   type: SEARCH_PERSON,
-  fetching: false,
-  persons,
+  payload,
 });
