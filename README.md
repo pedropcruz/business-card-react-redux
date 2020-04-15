@@ -1,4 +1,6 @@
-## business-card with react/redux
+# business-card with react/redux
+
+preview: https://affectionate-sinoussi-f6d8e4.netlify.app/
 
 Made this project, used [this api](https://jsonplaceholder.typicode.com/users) for fetching all users to show on my bussiness card app.
 

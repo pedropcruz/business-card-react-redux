@@ -21,6 +21,10 @@
     bottom: -48px;
     opacity: 0;
     transition: all 0.4s ease;
+    width: 100%;
+    @include tablet {
+      width: inherit;
+    }
   }
 
   &:after {

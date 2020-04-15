@@ -1,4 +1,4 @@
-import { put, takeEvery, call, all, delay } from 'redux-saga/effects';
+import { put, takeEvery, call, all } from 'redux-saga/effects';
 
 import { REQUESTING_DATA } from '../constants';
 

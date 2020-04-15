@@ -1,1 +1,7 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+$footer-background-color: transparent;
+$footer-padding: $size-1 $size-4;
+
 @import '~bulma/bulma';

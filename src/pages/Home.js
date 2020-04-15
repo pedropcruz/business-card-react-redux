@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
+// Disabling emoji used on footer
+
 import React, { Component } from 'react';
 
 import { compose, bindActionCreators } from 'redux';
@@ -23,21 +26,46 @@ class HomePageComponent extends Component {
     const LoadingOrFallback = fetching ? (
       <Loading fetching={fetching} />
     ) : !filtered.length ? (
-      <h1 className="error">Nothing matched to your</h1>
+      <div className="notification is-danger">
+        <h1>User not found</h1>
+      </div>
     ) : null;
 
     return (
       <section className="section">
         <div className="container">
+          <p class="title is-1">Business Cards App</p>
           <SearchBarComponent />
 
           {filtered.length ? (
-            <div className="columns is-multiline is-vcentered">
+            <div className="cards columns is-multiline is-vcentered">
               {filtered.map(this.person)}
             </div>
           ) : (
             LoadingOrFallback
           )}
+
+          <footer class="footer">
+            <div class="content has-text-centered">
+              <p>
+                <strong>
+                  Made with{' '}
+                  <span role="img" area-label="heart">
+                    ❤️
+                  </span>
+                </strong>{' '}
+                by <a href="https://www.pedropcruz.pt">Pedro Cruz</a>. The
+                source code it's on{' '}
+                <a
+                  href="https://github.com/pedropcruz/business-card-react-redux"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </a>
+              </p>
+            </div>
+          </footer>
         </div>
       </section>
     );
